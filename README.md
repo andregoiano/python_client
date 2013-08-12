@@ -5,6 +5,10 @@ A Python Client for Fosbury (http://fosbury.co). Fosbury is a platform to create
 
 Wraps around the Fosbury API. See the documentation at [Apiary.io](http://docs.fosbury.apiary.io/).
 
+# License
+
+[Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0.html)
+
 # Installation
 
 The Python library comes as a PyPi gem (see [Fosbury Python Client at PyPi](https://pypi.python.org/fosbury/fosbury/0.9.1) )
@@ -88,7 +92,7 @@ client.create_campaign_location(campaign['id'],
 client.distribute_campaign(campaign['id'])
 
 # Create 2 passes with the campaign above.
-# The returned JSON contains information on the location of the .pkpass files.
+# The returned JSON contains information on the location of the passes (live_url).
 pass1 = client.create_pass(campaign,
                             {'barcode':'11111',
                              'secondary_label':'John',
