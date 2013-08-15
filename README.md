@@ -45,25 +45,24 @@ In order to generate passes, you need to generate a template (a pass layout) and
 # Basic coupon campaign generation example
 # Create a basic template
 # Initialize the API client
-campaign = client.create_template('My template', 'coupon', {'primary_label': '20%', 'primary_value': 'Discount'})
+template = client.create_template('My template', 'coupon', {'primary_label': '20%', 'primary_value': 'Discount'})
 
 # Create a campaign with 10 passes
 # Because the barcode_type is set to 'single', 
-# only one pass will be rendered that can be installed 10 times.
 campaign = client.create_campaign(template['id'],
                                    {'quantity': 10,
                                     'barcode': '12345',
                                     'barcode_type': 'single'}
                                    )
 
-# Distribute the campaign, the pass will be rendered.
+# Distribute the campaign, the passes will be rendered.
 # The returned JSON provides information about the generic url to download passes.
 client.distribute_campaign(campaign['id'])
 ```
 
 ## Generating single passes
 
-When generating seperate passes, create a template and campaign first. After that, passes can be created with the createPass function. For more information on parameters and options, see the [API Documentation](http://docs.fosbury.apiary.io/)
+When generating seperate passes, create a template and campaign first. After that, passes can be created with the create_pass function. For more information on parameters and options, see the [API Documentation](http://docs.fosbury.apiary.io/)
 
 ```python
 # Create a basic template
@@ -113,7 +112,7 @@ Fosbury allows push notifications to be sent to passes. To achieve this, first u
 
 ```python
 // Update a pass. 
-// Note: the updatePass accepts a pass serial number or an id as identifier.
+// Note: the update_pass accepts a pass serial number or an id as identifier.
 client.update_pass('FSBABC123', {'secondary_value': '50% off!'})
 
 // Send the push notification to the pass
