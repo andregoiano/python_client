@@ -6,7 +6,7 @@ from errors import NoApiTokenProvidedException, MissingArgumentException
 Fosbury Python Client
 """
 
-__version__ = '0.9'
+__version__ = '0.9.5'
 __author__ = 'Willem Spruijt <willem@fosbury.co>'
 
 class Client():
@@ -79,6 +79,12 @@ class Client():
 
     def push_pass(self, pass_id, options={}):
       return self.put("passes/" + str(pass_id) + "/push", options)
+  
+    def redeem_pass(self, pass_id):
+      return self.post("passes/" + str(pass_id) + "/redeem", {})
+
+    def archive_pass(self, pass_id):
+      return self.post("passes/" + str(pass_id) + "/archive", {})
     
     def distribute_campaign(self, campaign_id):
       return self.post("campaigns/" + str(campaign_id) + "/distribute")
