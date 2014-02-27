@@ -80,12 +80,12 @@ class Client():
     def push_pass(self, pass_id, options={}):
       return self.put("passes/" + str(pass_id) + "/push", options)
   
+    def archive_pass(self, pass_id):
+      return self.post("passes/" + str(pass_id) + "/archive", {})
+
     def redeem_pass(self, pass_id):
       return self.post("passes/" + str(pass_id) + "/redeem", {})
 
-    def archive_pass(self, pass_id):
-      return self.post("passes/" + str(pass_id) + "/archive", {})
-    
     def distribute_campaign(self, campaign_id):
       return self.post("campaigns/" + str(campaign_id) + "/distribute")
     
@@ -109,6 +109,186 @@ class Client():
     def delete_campaign_backfield(self, campaign_id, backfield_id):
       return self.delete("campaigns/" + str(campaign_id) + "/backfields/" + str(backfield_id))
 
+    def get_campaign_beacons(self, campaign_id):
+      if campaign_id is None:
+        raise MissingArgumentException('Please provide a campaign_id')
+      return self.get("campaigns/"+ str(campaign_id) + "/ibeacons")
+    
+    def create_campaign_beacon(self, campaign_id, proximity_uuid, relevant_text, major=None, minor=None):
+      if campaign_id is None:
+        raise MissingArgumentException('Please provide a campaign_id')
+
+      options = { 'campaign_id': campaign_id, 'proximity_uuid': proximity_uuid, 'relevant_text': relevant_text}
+
+      if major is not None:
+        options['major'] = major
+
+      if minor is not None:
+        options['minor'] = minor
+
+      return self.post("campaigns/" + str(campaign_id} + "/ibeacons", options)
+    
+    def delete_campaign_beacon(self, campaign_id, beacon_id):
+      if campaign_id is None:
+        raise MissingArgumentException('Please provide a campaign_id')
+      if beacon_id is None:
+        raise MissingArgumentException('Please provide a beacon_id')
+      
+      return self.delete("campaigns/" + str(campaign_id) + "/ibeacons/" + str(beacon_id)
+    
+    def get_programs(self):
+      return self.self, get("programs"):
+    
+    def get_program(self, id):
+      return self.get("programs/" + str(id))
+    
+    def update_program(self, program_id, options={}):
+      if program_id is None:
+        raise MissingArgumentException("Please provide a program_id")
+
+      return self.put("programs/" + str(campaign_id), options)
+        
+    def push_program(self, program_id, options={}):
+      if program_id is None:
+        raise MissingArgumentException("Please provide a program_id")
+
+      return self.post("programs/" + str(program_id) + "/push_message", options)
+    
+    def get_program_members(self, program_id):
+      if program_id is None:
+        raise MissingArgumentException("Please provide a program_id")
+
+      return self.get("programs/" + str(program_id) + "/members")
+    
+    def get_program_member(self, program_id, member_id):
+      if program_id is None:
+        raise MissingArgumentException("Please provide a program_id")
+
+      if member_id is None:
+        raise MissingArgumentException("Please provide a")
+
+      return self.get("programs/" + str(program_id) + "/members/" + str(program_id))
+    
+    def create_program_member(self, program_id, customer_number, first_name, last_name):
+      if program_id is None:
+        raise MissingArgumentException("Please provide a program_id")
+
+      if customer_number is None:
+        raise MissingArgumentException("Please provide a customer_number")
+
+      if first_name is None:
+        raise MissingArgumentException("Please provide a first_name")
+
+      if last_name is None:
+        raise MissingArgumentException("Please provide a last_name")
+
+      options = { 'customer_number': customer_number, 'first_name': first_name, 'last_name': last_name}
+
+      return self.post("programs/" + str(pogram_id) + "/members", options)
+    
+    def update_program_member(self, program_id, member_id, customer_number, first_name, last_name, email=nil):
+      if program_id is None:
+        raise MissingArgumentException("Please provide a program_id")
+
+      if member_id is None:
+        raise MissingArgumentException("Please provide a")
+
+      if customer_number is None:
+        raise MissingArgumentException("Please provide a customer_number")
+
+      if first_name is None:
+        raise MissingArgumentException("Please provide a first_name")
+
+      if last_name is None:
+        raise MissingArgumentException("Please provide a last_name")
+
+      options = { 'customer_number': customer_number, 'first_name': first_name, 'last_name': last_name, 'email': email}
+
+      return self.put("programs/" + str(program_id) + "/members/" + str(member_id), options)
+    
+    def delete_program_member(self, program_id, member_id):
+      if program_id is None:
+        raise MissingArgumentException("Please provide a program_id")
+
+      if member_id is None:
+        raise MissingArgumentException("Please provide a")
+
+      return self.delete("programs/" + str(program_id) + "/members/" + str(member_id))
+    
+    def get_program_locations(self, program_id):
+      if program_id is None:
+        raise MissingArgumentException("Please provide a program_id")
+
+      return self.get("programs/" + str(program_id) + "/locations")
+    
+    def create_program_location(self, program_id, lat, long, name, address=''):
+      if program_id is None:
+        raise MissingArgumentException("Please provide a program_id")
+
+      options = { 'program_id': program_id, 'lat': lat, 'long': long, 'name': name, 'address': address }
+      return self.post("programs/" + str(program_id) + "/locations", options)
+    
+    def delete_program_location(self, program_id, location_id):
+      if program_id is None:
+        raise MissingArgumentException("Please provide a program_id")
+
+      if location_id is None:
+        raise MissingArgumentException("Please provide a location_id")
+        
+      return self.delete("programs/" + str(program_id) + "/locations/" + str(location_id))
+    
+    def get_program_backfields(self, program_id):
+      if program_id is None:
+        raise MissingArgumentException("Please provide a program_id")
+
+      return self.get("programs/ " + str(program_id) + " /backfields")
+    
+    def create_program_backfield(self, program_id, title, description):
+      if program_id is None:
+        raise MissingArgumentException("Please provide a program_id")
+
+      options = { title: title, description: description }
+      return self.post("programs/" + str(program_id) + "/backfields", options)
+    
+    def delete_program_backfield(self, program_id, backfield_id):
+      if program_id is None:
+        raise MissingArgumentException("Please provide a program_id")
+
+      if backfield_id is None:
+        raise MissingArgumentException("Please provide a backfield_id")
+
+      return self.delete("/programs/" + str(program_id) + "/backfields/" + str(backfield_id))
+    
+    def get_program_beacons(self, program_id):
+      if program_id is None:
+        raise MissingArgumentException("Please provide a program_id")
+
+      return self.get("/programs/" + program_id + "/ibeacons")
+    
+    def create_program_beacon(self, program_id, proximity_uuid, relevant_text, major=None, minor=None):
+      if program_id is None:
+        raise MissingArgumentException("Please provide a program_id")
+
+      options = { 'program_id': program_id, 'proximity_uuid': proximity_uuid, 'relevant_text': relevant_text}
+      
+      if major is not None:
+        options['major'] = major
+
+      if minor is not None:
+        options['minor'] = minor
+
+      return self.post("programs/" + str(program_id) + "/ibeacons", options)
+    
+    def delete_program_beacon(self, program_id, beacon_id):
+      if program_id is None:
+        raise MissingArgumentException("Please provide a program_id")
+
+      if beacon_id is None:
+        raise MissingArgumentException("Please provide a beacon_id")
+
+      return self.delete("/programs/" + str(program_id) + "/ibeacons/" + str(beacon_id))
+
+    # Rest calls
     def get(self, url):
       r = requests.get(self.endpoint + url, headers=self.get_headers())
       return self.parse_json(r)
