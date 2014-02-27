@@ -6,7 +6,7 @@ from errors import NoApiTokenProvidedException, MissingArgumentException
 Fosbury Python Client
 """
 
-__version__ = '0.9.5'
+__version__ = '0.9.6'
 __author__ = 'Willem Spruijt <willem@fosbury.co>'
 
 class Client():
