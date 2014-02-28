@@ -126,7 +126,7 @@ class Client():
       if minor is not None:
         options['minor'] = minor
 
-      return self.post("campaigns/" + str(campaign_id} + "/ibeacons", options)
+      return self.post("campaigns/" + str(campaign_id) + "/ibeacons", options)
     
     def delete_campaign_beacon(self, campaign_id, beacon_id):
       if campaign_id is None:
@@ -134,10 +134,10 @@ class Client():
       if beacon_id is None:
         raise MissingArgumentException('Please provide a beacon_id')
       
-      return self.delete("campaigns/" + str(campaign_id) + "/ibeacons/" + str(beacon_id)
+      return self.delete("campaigns/" + str(campaign_id) + "/ibeacons/" + str(beacon_id))
     
     def get_programs(self):
-      return self.self, get("programs"):
+      return self.get("programs")
     
     def get_program(self, id):
       return self.get("programs/" + str(id))
