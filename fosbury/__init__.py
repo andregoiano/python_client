@@ -92,8 +92,8 @@ class Client():
     def get_campaign_locations(self, campaign_id):
       return self.get("/campaigns/" + str(campaign_id) + "/locations")
 
-    def create_campaign_location(self, campaign_id, lat, lng, name, address=''):
-      options = { 'campaign_id': campaign_id, 'lat': lat, 'long': lng, 'name': name, 'address': address }
+    def create_campaign_location(self, campaign_id, lat, lng, name, relevant_text, address=''):
+      options = { 'campaign_id': campaign_id, 'lat': lat, 'long': lng, 'name': name, 'address': address, 'relevant_text': relevant_text }
       return self.post("campaigns/" + str(campaign_id) + "/locations", options)
     
     def delete_campaign_location(self, campaign_id, location_id):
@@ -221,11 +221,11 @@ class Client():
 
       return self.get("programs/" + str(program_id) + "/locations")
     
-    def create_program_location(self, program_id, lat, long, name, address=''):
+    def create_program_location(self, program_id, lat, long, name, relevant_text, address=''):
       if program_id is None:
         raise MissingArgumentException("Please provide a program_id")
 
-      options = { 'program_id': program_id, 'lat': lat, 'long': long, 'name': name, 'address': address }
+      options = { 'program_id': program_id, 'lat': lat, 'long': long, 'name': name, 'address': address, 'relevant_text': relevant_text }
       return self.post("programs/" + str(program_id) + "/locations", options)
     
     def delete_program_location(self, program_id, location_id):
