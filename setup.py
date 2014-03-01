@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(name='Fosbury',
-      version='0.9.6',
+      version='0.9.6.1',
       author='Willem Spruijt',
       author_email='willem@fosbury.co',
       description='Python client for Fosbury (http://fosbury.co)',
